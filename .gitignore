@@ -19,3 +19,4 @@
 *.swp
 
 config/secrets.yml
+public/assets/*
