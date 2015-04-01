@@ -16,8 +16,10 @@
 !/log/.keep
 /tmp
 
+# The youj
 *.swp
-
-config/secrets.yml
 public/assets/*
 Gemfile.lock
+
+# Ignore application configuration
+/config/application.yml
