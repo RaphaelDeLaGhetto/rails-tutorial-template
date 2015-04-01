@@ -32,6 +32,7 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'pg'
+gem 'figaro'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
