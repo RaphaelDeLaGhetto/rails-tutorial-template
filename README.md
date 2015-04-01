@@ -18,13 +18,27 @@ bundle install
 # Set up database
 
 ```
-rake db:migrate
+rake db:setup
 ```
 
 ## Test data
 
 ```
 rake db:seed
+```
+
+# Configure
+
+`config/application.yml` is where [figaro](https://github.com/laserlemon/figaro) stores all your secret configuration details, so you need to create it manually:
+
+```
+vim config/application.yml
+```
+
+Paste this and save:
+
+```
+default_from: 'noreply@example.com'
 ```
 
 # Run server
