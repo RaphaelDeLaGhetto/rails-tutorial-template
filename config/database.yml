@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: rails_tutorial_template_production
-  username: rails_tutorial_template
+  username: deploy
   password: <%= ENV['PROVIDER_DATABASE_PASSWORD'] %>
