@@ -34,6 +34,13 @@ gem 'bootstrap-will_paginate'
 gem 'pg'
 gem 'figaro'
 
+# capistrano
+gem 'capistrano'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'capistrano-rbenv', github: 'capistrano/rbenv'
+gem 'capistrano-passenger'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
