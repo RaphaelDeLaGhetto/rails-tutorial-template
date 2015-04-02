@@ -19,7 +19,6 @@
 # The youj
 *.swp
 public/assets/*
-Gemfile.lock
 
 # Ignore application configuration
 /config/application.yml
