@@ -40,6 +40,7 @@ gem 'capistrano-bundler'
 gem 'capistrano-rails'
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 gem 'capistrano-passenger'
+gem 'highline'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
