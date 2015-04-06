@@ -59,6 +59,20 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_redirected_to user
   end
 
+  test "password reset on inactive user" do
+    get new_password_reset_path
+    assert_template 'password_resets/new'
+    # Valid email, inactive user
+    assert_nil @user.activation_token
+    assert_nil @user.activation_digest
+    @user.toggle!(:activated)
+    post password_resets_path, password_reset: { email: @user.email }
+    assert_equal flash[:info], 'Please check your email to activate your account.'
+    @user.reload
+    assert_not_nil @user.activation_digest
+    assert_redirected_to root_url
+  end
+
   test "expired token" do
     get new_password_reset_path
     post password_resets_path, password_reset: { email: @user.email }
@@ -73,5 +87,6 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_match /Password reset has expired/i, response.body
   end
+
 end
 
