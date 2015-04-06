@@ -2,6 +2,8 @@
 
 Just the best parts from Michael Hartl's wonderful [book](https://www.railstutorial.org/book).
 
+Learn how to [deploy it into production](http://www.libertyseeds.ca/2015/03/31/Deploying-the-Rails-Tutorial-Sample-App/).
+
 # Download
 
 ```
