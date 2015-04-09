@@ -40,7 +40,17 @@ vim config/application.yml
 Paste this and save:
 
 ```
+# General
+app_name: 'rails_tutorial_template'
+
+# Email
 default_from: 'noreply@example.com'
+#gmail_username: "noreply@example.com"
+#gmail_password: "secretp@ssword"
+
+# Production
+#secret_key_base: "SomeRakeSecretHexKey"
+#provider_database_password: 'secretp@ssword'
 ```
 
 # Run server
