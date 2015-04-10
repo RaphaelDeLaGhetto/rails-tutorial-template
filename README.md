@@ -49,6 +49,7 @@ default_from: 'noreply@example.com'
 #gmail_password: "secretp@ssword"
 
 # Production
+#host: "example.com"
 #secret_key_base: "SomeRakeSecretHexKey"
 #provider_database_password: 'secretp@ssword'
 ```
