@@ -42,6 +42,7 @@ Paste this and save:
 ```
 # General
 app_name: 'rails_tutorial_template'
+app_title: 'Ruby on Rails Tutorial Sample App'
 
 # Email
 default_from: 'noreply@example.com'
