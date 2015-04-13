@@ -14,7 +14,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-    assert_select "title", "Sign up | Ruby on Rails Tutorial Sample App"
+    assert_select "title", "Sign up | #{ENV['app_title']}"
   end
 
   test "should redirect edit when not logged in" do
