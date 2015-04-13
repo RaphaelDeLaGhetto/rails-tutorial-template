@@ -33,6 +33,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'pg'
 gem 'figaro'
+gem 'react-rails'
 
 # capistrano
 gem 'capistrano'

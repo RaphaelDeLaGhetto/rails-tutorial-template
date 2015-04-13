@@ -88,4 +88,8 @@ Rails.application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
+
+  # React
+  config.react.variant = :production
+  config.react.addons = true 
 end
