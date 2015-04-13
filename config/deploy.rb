@@ -1,11 +1,11 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'rails_tutorial_template'
-set :repo_url, 'https://github.com/RaphaelDeLaGhetto/rails-tutorial-template'
+set :application, '1000yearfilms'
+set :repo_url, 'git@d.libertyseeds.ca:/opt/git/1000yearfilms.git'
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/deploy/rails-tutorial-template'
+set :deploy_to, '/home/deploy/1000yearfilms'
 
 # Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml')
