@@ -15,7 +15,7 @@ git clone https://github.com/RaphaelDeLaGhetto/rails-tutorial-template.git
 ```
 cd rails-tutorial-template
 bundle install
-npm install
+sudo npm install
 ```
 
 # Set up database
