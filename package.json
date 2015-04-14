@@ -1,14 +1,18 @@
 {
-  "name": "archiver-hai",
+  "name": "my-hai",
   "version": "0.0.0",
-  "description": "Rails deployment of the archiver human-agent interface",
+  "description": "React and Jest are ready to go!",
   "main": "application.js",
+  "repository": {
+     "type": "git",
+     "url": "https://github.com/RaphaelDeLaGhetto/rails-tutorial-template.git"
+  },
   "keywords": [
     "archiver",
     "hai"
   ],
   "author": "Daniel Bidulock",
-  "license": "Copyright 2015 Capitol Hill Productions Inc.",
+  "license": "MIT",
   "devDependencies": {
     "browserify": "^9.0.8",
     "browserify-incremental": "^2.0.0",
