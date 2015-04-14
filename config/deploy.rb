@@ -18,6 +18,7 @@ set :passenger_restart_with_sudo, true
 # deploy
 namespace :deploy do
 
+  # 2015-4-14 https://gist.github.com/ryanray/7579912
   desc 'Install node modules'
   task :npm_install do
     on roles(:app) do
