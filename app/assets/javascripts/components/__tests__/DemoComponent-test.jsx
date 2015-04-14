@@ -6,6 +6,6 @@ describe('DemoComponent', function() {
         var TestUtils = React.addons.TestUtils;
         var DemoComponent = require('../DemoComponent');
         var demoComponent = TestUtils.renderIntoDocument(<DemoComponent/>);
-        expect(demoComponent.getDOMNode().textContent).toBe('Demo Component');
+        expect(demoComponent.getDOMNode().textContent).toBe('React demo component');
     });
 });

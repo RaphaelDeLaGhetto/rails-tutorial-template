@@ -1,8 +1,8 @@
 var React = require('react');
 
-var DemoComponent = React.createClass({displayName: 'Demo Component',
+var DemoComponent = React.createClass({displayName: 'React demo component',
     render: function() {
-        return <div>Demo Component</div>;
+        return <div>React demo component</div>;
       }
   });
 
