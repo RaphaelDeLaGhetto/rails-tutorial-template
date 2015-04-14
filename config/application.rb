@@ -22,11 +22,8 @@ module SampleApp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-<<<<<<< HEAD
 
     # browserify JSX stuff
     config.browserify_rails.commandline_options = "--transform reactify --extension=\".jsx\""
-=======
->>>>>>> b6bd710ce87c60ffb3c0b158c7d9a7df081c1abc
   end
 end
