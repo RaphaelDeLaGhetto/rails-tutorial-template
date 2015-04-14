@@ -11,12 +11,19 @@ set :deploy_to, '/home/deploy/1000yearfilms'
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'node_modules')
 
 set :passenger_restart_with_sudo, true
 
 # deploy
 namespace :deploy do
+
+  desc 'Install node modules'
+  task :npm_install do
+    on roles(:app) do
+      execute "cd #{release_path} && npm install"
+    end
+  end
 
   desc 'Restart application'
   task :restart do
@@ -25,6 +32,7 @@ namespace :deploy do
     end
   end
 
+  before :updated, 'deploy:npm_install'
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 end
