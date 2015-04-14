@@ -43,6 +43,9 @@ gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 gem 'capistrano-passenger'
 gem 'highline'
 
+# browserify
+gem 'browserify-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
