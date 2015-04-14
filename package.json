@@ -1,0 +1,36 @@
+{
+  "name": "archiver-hai",
+  "version": "0.0.0",
+  "description": "Rails deployment of the archiver human-agent interface",
+  "main": "application.js",
+  "keywords": [
+    "archiver",
+    "hai"
+  ],
+  "author": "Daniel Bidulock",
+  "license": "Copyright 2015 Capitol Hill Productions Inc.",
+  "devDependencies": {
+    "browserify": "^9.0.8",
+    "browserify-incremental": "^2.0.0",
+    "jest-cli": "^0.4.0",
+    "react": "^0.13.1",
+    "react-tools": "^0.13.1",
+    "reactify": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "node ./node_modules/jest-cli/bin/jest.js"
+  },
+  "jest": {
+    "rootDir": "./app/assets/javascripts/components",
+    "scriptPreprocessor": "<rootDir>/__tests__/preprocessor.js",
+    "moduleFileExtensions": [ "js", "jsx"],
+    "unmockedModulePathPatterns": [
+      "react"
+    ],
+    "testFileExtensions": ["js", "jsx"],
+    "testPathIgnorePatterns": [ "preprocessor.js" ]
+  }
+}
