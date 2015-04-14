@@ -15,6 +15,7 @@ git clone https://github.com/RaphaelDeLaGhetto/rails-tutorial-template.git
 ```
 cd rails-tutorial-template
 bundle install
+npm install
 ```
 
 # Set up database
@@ -59,11 +60,18 @@ default_from: 'noreply@example.com'
 rails s
 ```
 
-# Test
+# Rails Test
 
 ```
 rake
 ```
+
+# React test
+
+```
+npm test
+```
+
 
 # License
 
