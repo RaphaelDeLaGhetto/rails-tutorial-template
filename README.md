@@ -43,6 +43,7 @@ Paste this and save:
 ```
 # General
 app_name: 'rails_tutorial_template'
+app_title: 'Ruby on Rails Tutorial Sample App'
 
 # Email
 default_from: 'noreply@example.com'
@@ -50,6 +51,7 @@ default_from: 'noreply@example.com'
 #gmail_password: "secretp@ssword"
 
 # Production
+#host: "example.com"
 #secret_key_base: "SomeRakeSecretHexKey"
 #provider_database_password: 'secretp@ssword'
 ```
@@ -60,7 +62,7 @@ default_from: 'noreply@example.com'
 rails s
 ```
 
-# Rails Test
+# Rails test
 
 ```
 rake
@@ -71,7 +73,6 @@ rake
 ```
 npm test
 ```
-
 
 # License
 
