@@ -1,0 +1,7 @@
+<li>
+  <%= link_to agent.name, agent %>
+  <% if current_agent.admin? && !current_agent?(agent) %>
+      | <%= link_to "delete", agent, method: :delete,
+                                     data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

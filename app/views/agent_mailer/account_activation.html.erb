@@ -1,0 +1,9 @@
+<h1>Sample App</h1>
+
+<p>Hi <%= @agent.name %>,</p>
+
+<p>
+  Welcome to the Sample App! Click on the link below to activate your account:
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@agent.activation_token, email: @agent.email) %>

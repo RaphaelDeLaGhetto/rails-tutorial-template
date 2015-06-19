@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase
+class AgentsControllerTest < ActionController::TestCase
   def setup
-    @user = users(:michael)
-    @other_user = users(:archer)
+    @agent = agents(:michael)
+    @other_agent = agents(:archer)
   end
 
   test "should redirect index when not logged in" do
@@ -18,51 +18,51 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should redirect edit when not logged in" do
-    get :edit, id: @user
+    get :edit, id: @agent
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test "should redirect update when not logged in" do
-    patch :update, id: @user, user: { name: @user.name, email: @user.email }
+    patch :update, id: @agent, agent: { name: @agent.name, email: @agent.email }
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
-  test "should redirect edit when logged in as wrong user" do
-    log_in_as(@other_user)
-    get :edit, id: @user
+  test "should redirect edit when logged in as wrong agent" do
+    log_in_as(@other_agent)
+    get :edit, id: @agent
     assert flash.empty?
     assert_redirected_to root_url
   end
 
-  test "should redirect update when logged in as wrong user" do
-    log_in_as(@other_user)
-    patch :update, id: @user, user: { name: @user.name, email: @user.email }
+  test "should redirect update when logged in as wrong agent" do
+    log_in_as(@other_agent)
+    patch :update, id: @agent, agent: { name: @agent.name, email: @agent.email }
     assert flash.empty?
     assert_redirected_to root_url
   end
 
   test "should not allow the admin attribute to be edited via the web" do
-    log_in_as(@other_user)
-    assert_not @other_user.admin?
-    patch :update, id: @other_user, user: { password: 'somejunk',
+    log_in_as(@other_agent)
+    assert_not @other_agent.admin?
+    patch :update, id: @other_agent, agent: { password: 'somejunk',
                                             password_confirmation: 'somejunk',
                                             admin: true }
-    assert_not @other_user.reload.admin?
+    assert_not @other_agent.reload.admin?
   end
 
   test "should redirect destroy when not logged in" do
-    assert_no_difference 'User.count' do
-      delete :destroy, id: @user
+    assert_no_difference 'Agent.count' do
+      delete :destroy, id: @agent
     end
     assert_redirected_to login_url
   end
 
   test "should redirect destroy when logged in as a non-admin" do
-    log_in_as(@other_user)
-    assert_no_difference 'User.count' do
-      delete :destroy, id: @user
+    log_in_as(@other_agent)
+    assert_no_difference 'Agent.count' do
+      delete :destroy, id: @agent
     end
     assert_redirected_to root_url
   end

@@ -9,21 +9,21 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include ApplicationHelper
 
-  # Returns true if a test user is logged in.
+  # Returns true if a test agent is logged in.
   def is_logged_in?
-    !session[:user_id].nil?
+    !session[:agent_id].nil?
   end
 
-  # Logs in a test user.
-  def log_in_as(user, options = {})
+  # Logs in a test agent.
+  def log_in_as(agent, options = {})
     password = options[:password] || 'password'
     remember_me = options[:remember_me] || '1'
     if integration_test?
-      post login_path, session: { email: user.email,
+      post login_path, session: { email: agent.email,
                                   password: password,
                                   remember_me: remember_me }
     else
-      session[:user_id] = user.id
+      session[:agent_id] = agent.id
     end
   end
 

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
 
-  get 'users/new'
+  get 'agents/new'
 
   root 'static_pages#home'
 
@@ -14,13 +14,13 @@ Rails.application.routes.draw do
   get 'contact' => 'static_pages#contact'
   get 'apps' => 'static_pages#apps'
 
-  get 'signup' => 'users#new'
+  get 'signup' => 'agents#new'
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
-  resources :users
+  resources :agents
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 

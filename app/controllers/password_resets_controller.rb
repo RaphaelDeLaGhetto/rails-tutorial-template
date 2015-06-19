@@ -1,22 +1,22 @@
 class PasswordResetsController < ApplicationController
-  before_action :get_user,   only: [:edit, :update]
-  before_action :valid_user, only: [:edit, :update]
+  before_action :get_agent,   only: [:edit, :update]
+  before_action :valid_agent, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
 
   def new
   end
 
   def create
-    @user = User.find_by(email: params[:password_reset][:email].downcase)
-    if @user
-      if @user.activated?
-        @user.create_reset_digest
-        @user.send_password_reset_email
+    @agent = Agent.find_by(email: params[:password_reset][:email].downcase)
+    if @agent
+      if @agent.activated?
+        @agent.create_reset_digest
+        @agent.send_password_reset_email
         flash[:info] = "Email sent with password reset instructions"
       else
-        @user.create_activation_digest
-        @user.save
-        @user.send_activation_email
+        @agent.create_activation_digest
+        @agent.save
+        @agent.send_activation_email
         flash[:info] = "Please check your email to activate your account."
       end
       redirect_to root_url
@@ -33,10 +33,10 @@ class PasswordResetsController < ApplicationController
     if password_blank?
       flash.now[:danger] = "Password can't be blank"
       render 'edit'
-    elsif @user.update_attributes(user_params)
-      log_in @user
+    elsif @agent.update_attributes(agent_params)
+      log_in @agent
       flash[:success] = "Password has been reset."
-      redirect_to @user
+      redirect_to @agent
     else
       render 'edit'
     end
@@ -44,31 +44,31 @@ class PasswordResetsController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:password, :password_confirmation)
+    def agent_params
+      params.require(:agent).permit(:password, :password_confirmation)
     end
 
     # Returns true if password is blank.
     def password_blank?
-      params[:user][:password].blank?
+      params[:agent][:password].blank?
     end
 
     # Before filters
 
-    def get_user
-      @user = User.find_by(email: params[:email])
+    def get_agent
+      @agent = Agent.find_by(email: params[:email])
     end
 
-    # Confirms a valid user.
-    def valid_user
-      unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
+    # Confirms a valid agent.
+    def valid_agent
+      unless (@agent && @agent.activated? && @agent.authenticated?(:reset, params[:id]))
         redirect_to root_url
       end
     end
 
     # Checks expiration of reset token.
     def check_expiration
-      if @user.password_reset_expired?
+      if @agent.password_reset_expired?
         flash[:danger] = "Password reset has expired."
         redirect_to new_password_reset_url
       end

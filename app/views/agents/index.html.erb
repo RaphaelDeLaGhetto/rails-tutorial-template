@@ -1,0 +1,10 @@
+<% provide(:title, 'All agents') %>
+<h1>All agents</h1>
+
+<%= will_paginate %>
+
+<ul class="agents">
+  <%= render @agents %>
+</ul>
+
+<%= will_paginate %>

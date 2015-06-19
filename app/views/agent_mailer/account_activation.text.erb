@@ -1,0 +1,5 @@
+Hi <%= @agent.name %>,
+
+Welcome to the Sample App! Click on the link below to activate your account:
+
+<%= edit_account_activation_url(@agent.activation_token, email: @agent.email) %>

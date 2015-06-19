@@ -1,52 +1,64 @@
 module SessionsHelper
 
-  # Logs in the given user.
-  def log_in(user)
-    session[:user_id] = user.id
+  # Logs in the given agent.
+  def log_in(agent)
+    session[:agent_id] = agent.id
   end
 
-  # Remembers a user in a persistent session.
-  def remember(user)
-    user.remember
-    cookies.permanent.signed[:user_id] = user.id
-    cookies.permanent[:remember_token] = user.remember_token
+  # Remembers a agent in a persistent session.
+  def remember(agent)
+    agent.remember
+    cookies.permanent.signed[:agent_id] = agent.id
+    cookies.permanent[:remember_token] = agent.remember_token
   end
 
-  # Returns true if the given user is the current user.
-  def current_user?(user)
-    user == current_user
+  # Returns true if the given agent is the current agent.
+  def current_agent?(agent)
+    agent == current_agent
   end
 
-  # Returns the current logged-in user (if any).
-  def current_user
-    if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember, cookies[:remember_token])
-        log_in user
-        @current_user = user
+  # Returns the current logged-in agent (if any).
+  def current_agent
+    if (agent_id = session[:agent_id])
+      @current_agent ||= Agent.find_by(id: agent_id)
+    elsif (agent_id = cookies.signed[:agent_id])
+      agent = Agent.find_by(id: agent_id)
+      if agent && agent.authenticated?(:remember, cookies[:remember_token])
+        log_in agent
+        @current_agent = agent
       end
     end
   end
 
-  # Returns true if the user is logged in, false otherwise.
+  # Returns true if the agent is logged in, false otherwise.
   def logged_in?
-    !current_user.nil?
+    !current_agent.nil?
+  end
+
+  # Confirms the correct agent.
+  def correct_agent(agent)
+    if !admin_logged_in?
+      redirect_to(root_url) unless current_agent?(agent)
+    end
+  end
+
+  # Returns true if the agent is logged in as an admin, false otherwise.
+  def admin_logged_in?
+    !current_agent.nil? && current_agent.admin?
   end
 
   # Forgets a persistent session.
-  def forget(user)
-    user.forget
-    cookies.delete(:user_id)
+  def forget(agent)
+    agent.forget
+    cookies.delete(:agent_id)
     cookies.delete(:remember_token)
   end
 
-  # Log out the current user.
+  # Log out the current agent.
   def log_out
-    forget(current_user);
-    session.delete(:user_id)
-    @current_user = nil
+    forget(current_agent);
+    session.delete(:agent_id)
+    @current_agent = nil
   end
 
   # Redirects to stored location (or to the default).

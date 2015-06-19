@@ -3,12 +3,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      if user.activated?
-        log_in user
-        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or user
+    agent = Agent.find_by(email: params[:session][:email].downcase)
+    if agent && agent.authenticate(params[:session][:password])
+      if agent.activated?
+        log_in agent
+        params[:session][:remember_me] == '1' ? remember(agent) : forget(agent)
+        redirect_back_or agent
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."
