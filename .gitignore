@@ -24,3 +24,5 @@ public/assets/*
 /config/application.yml
 
 /node_modules
+
+Gemfile.lock

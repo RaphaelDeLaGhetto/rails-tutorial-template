@@ -1,5 +1,6 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
+set :passenger_restart_with_touch, true
 
 set :application, 'rails_tutorial_template'
 set :repo_url, 'https://github.com/RaphaelDeLaGhetto/rails-tutorial-template'
