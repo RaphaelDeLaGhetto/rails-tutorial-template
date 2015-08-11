@@ -3,18 +3,30 @@ class AgentsController < ApplicationController
   before_action :correct_agent, only: [:edit, :update]
   before_action :admin_agent, only: :destroy
 
+  #
+  # index
+  #
   def index
     @agents = Agent.paginate(page: params[:page])
   end
 
+  #
+  # show
+  #
   def show
     @agent = Agent.find(params[:id])
   end
 
+  #
+  # new
+  #
   def new
     @agent = Agent.new
   end
 
+  #
+  # create
+  #
   def create
     @agent = Agent.new(agent_params)
     if @agent.save
@@ -26,9 +38,15 @@ class AgentsController < ApplicationController
     end
   end
 
+  #
+  # edit
+  #
   def edit
   end
 
+  #
+  # update
+  #
   def update
     if @agent.update_attributes(agent_params)
       flash[:success] = "Profile updated"
