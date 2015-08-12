@@ -74,6 +74,21 @@ rake
 npm test
 ```
 
+# Heroku
+
+Deploying this to Heroku is a real trick. It seems there's some issues with Browserify and the various Node modules that get all packed up during the asset precompile stage. I solved the problem with help from: [ryochikazawa.com](http://ryochikazawa.com/2015/01/30/heroku-with-browserify-rails.html). The `.buildpacks` file is all part of this project's repository, so all that really needs to be done is:
+
+```
+heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+```
+
+Then deploy the usual way:
+
+```
+git push heroku master
+```
+
+
 # License
 
 MIT
