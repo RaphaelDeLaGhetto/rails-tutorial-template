@@ -71,4 +71,18 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.url if request.get?
   end
+
+  # Confirms an admin agent.
+  def admin_agent
+    redirect_to(root_url) unless current_agent && current_agent.admin?
+  end
+
+  # Confirms a logged-in agent.
+  def logged_in_agent
+    unless logged_in?
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
 end
