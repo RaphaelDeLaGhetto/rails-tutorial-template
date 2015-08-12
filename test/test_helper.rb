@@ -27,6 +27,15 @@ class ActiveSupport::TestCase
     end
   end
 
+  # Log out the current agent.
+  def log_out
+    if integration_test?
+      delete logout_path
+    else
+      session.delete(:agent_id)
+    end
+  end
+
   private
 
     # Returns true inside an integration test.
