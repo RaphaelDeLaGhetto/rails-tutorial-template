@@ -15,12 +15,55 @@ class AgentsControllerTest < ActionController::TestCase
   end
 
   #
+  # show
+  #
+  test "should redirect show when not logged in" do
+    get :show, id: @agent
+    assert_redirected_to login_url
+  end
+
+  test "should show when logged in" do
+    log_in_as(@agent)
+    get :show, id: @agent
+    assert_response :success
+  end
+
+  #
   # new
   #
   test "should get new" do
     get :new
     assert_response :success
     assert_select "title", "Sign up | #{ENV['app_title']}"
+  end
+
+  #
+  # create
+  #
+  test "should not allow a non-admin to create an admin agent" do
+    log_in_as(@agent)
+    assert_no_difference 'Agent.count' do
+      post :create, agent: { name: 'Bojack Horseman',
+                             email: 'bojack@netflix.com',
+                             password: 'somejunk',
+                             password_confirmation: 'somejunk',
+                             admin: true }
+    end
+    assert_redirected_to new_agent_path
+    assert_equal 'You cannot create an admin agent', flash[:danger]
+  end
+
+  test "should allow an admin to create an admin agent" do
+    log_in_as(@admin)
+    assert_difference 'Agent.count', 1 do
+      post :create, agent: { name: 'Bojack Horseman',
+                             email: 'bojack@netflix.com',
+                             password: 'somejunk',
+                             password_confirmation: 'somejunk',
+                             admin: true }
+    end
+    assert_redirected_to root_url
+    assert_equal 'An activation email has been sent to the new agent.', flash[:info]
   end
 
   #
@@ -39,6 +82,12 @@ class AgentsControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
+  test "should allow admin to edit agent" do
+    log_in_as(@admin)
+    get :edit, id: @agent
+    assert_response :success
+  end
+
   #
   # update
   #
@@ -55,14 +104,34 @@ class AgentsControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
-  test "should not allow the admin attribute to be edited via the web" do
+  test "should allow admin to update agent" do
+    log_in_as(@admin)
+    assert_not @agent.admin?
+    patch :update, id: @agent, agent: { name: 'Bojack Horseman',
+                                        email: 'bojack@netflix.com' }
+    @agent.reload
+    assert_equal 'Bojack Horseman', @agent.name
+    assert_equal 'bojack@netflix.com', @agent.email
+  end
+
+  test "should not allow a non-admin to edit the admin attribute via the web" do
     log_in_as(@agent)
     assert_not @agent.admin?
     patch :update, id: @agent, agent: { password: 'somejunk',
-                                            password_confirmation: 'somejunk',
-                                            admin: true }
+                                        password_confirmation: 'somejunk',
+                                        admin: true }
     assert_not @agent.reload.admin?
   end
+
+  test "should allow an admin to edit the admin attribute via the web" do
+    log_in_as(@admin)
+    assert @admin.admin?
+    patch :update, id: @agent, agent: { password: 'somejunk',
+                                        password_confirmation: 'somejunk',
+                                        admin: true }
+    assert @agent.reload.admin?
+  end
+
 
   #
   # destroy

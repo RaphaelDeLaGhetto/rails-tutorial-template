@@ -1,7 +1,10 @@
 class AgentsController < ApplicationController
-  before_action :logged_in_agent, only: [:index, :edit, :update, :destroy]
-  before_action :correct_agent, only: [:edit, :update]
-  before_action :admin_agent, only: :destroy
+  before_action :logged_in_agent, only: [:index, :show, :edit, :update, :destroy]
+  before_action :set_agent, only: [:show, :edit, :update, :destroy]
+  before_action only: [:edit, :update] do
+    correct_agent @agent 
+  end
+  before_action :admin_agent, only: [:destroy]
 
   #
   # index
@@ -28,10 +31,19 @@ class AgentsController < ApplicationController
   # create
   #
   def create
+    message = "Please check your email to activate your account."
+    if admin_logged_in?
+      message = "An activation email has been sent to the new agent."
+    elsif agent_params[:admin]
+      flash[:danger] = 'You cannot create an admin agent'
+      redirect_to new_agent_path
+      return
+    end
+
     @agent = Agent.new(agent_params)
     if @agent.save
       @agent.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      flash[:info] = message
       redirect_to root_url
     else
       render 'new'
@@ -48,7 +60,7 @@ class AgentsController < ApplicationController
   # update
   #
   def update
-    if @agent.update_attributes(agent_params)
+    if @agent.update_attributes(admin_logged_in? ? agent_params : agent_params.except(:admin))
       flash[:success] = "Profile updated"
       redirect_to @agent
     else
@@ -56,6 +68,9 @@ class AgentsController < ApplicationController
     end
   end
 
+  #
+  # destroy
+  #
   def destroy
     Agent.find(params[:id]).destroy
     flash[:success] = "Agent deleted"
@@ -65,28 +80,10 @@ class AgentsController < ApplicationController
   private
 
     def agent_params
-      params.require(:agent).permit(:name, :email, :password, :password_confirmation)
+      params.require(:agent).permit(:name, :email, :password, :password_confirmation, :admin)
     end
 
-    # Before filters
-
-    # Confirms a logged-in agent.
-    def logged_in_agent
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
-
-    # Confirms the correct agent.
-    def correct_agent
+    def set_agent
       @agent = Agent.find(params[:id])
-      redirect_to(root_url) unless current_agent?(@agent)
-    end
-
-    # Confirms an admin agent.
-    def admin_agent
-      redirect_to(root_url) unless current_agent.admin?
     end
 end
