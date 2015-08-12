@@ -1,6 +1,14 @@
 <% provide(:title, 'All agents') %>
 <h1>All agents</h1>
 
+<% if current_agent.admin? %>
+  <h2>                           
+    <%= button_to new_agent_path, { method: "get", class: "btn btn-default btn-lg btn-success" } do %> 
+      <i class='glyphicon glyphicon-plus' id='add-agent'></i> Add a new agent
+    <% end %>                    
+  </h2>
+<% end %>
+
 <%= will_paginate %>
 
 <ul class="agents">
