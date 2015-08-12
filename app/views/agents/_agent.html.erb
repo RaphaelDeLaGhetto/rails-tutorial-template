@@ -1,7 +1,19 @@
 <li>
-  <%= link_to agent.name, agent %>
-  <% if current_agent.admin? && !current_agent?(agent) %>
-      | <%= link_to "delete", agent, method: :delete,
-                                     data: { confirm: "You sure?" } %>
-  <% end %>
+  <span class="col-sm-1">
+    <% if current_agent.admin? || current_agent?(agent) %>
+      <%= link_to edit_agent_path agent do %>
+        <i class='glyphicon glyphicon-edit'></i>
+      <% end %>
+    <% end %>
+  </span>
+  <span class="col-sm-3">
+    <%= link_to agent.name, agent %><% if agent.admin %>, administrator<% end %>
+  </span>
+  <span class="col-sm-8 text-right">
+    <% if current_agent.admin? %>
+      <%= link_to agent, method: :delete, data: { confirm: "You sure?" } do %>
+        <i class='glyphicon glyphicon-remove'></i>
+      <% end %>
+    <% end %>
+  </span>
 </li>
