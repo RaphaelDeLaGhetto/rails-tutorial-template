@@ -11,3 +11,14 @@
 
 <%= f.label :password_confirmation, "Confirmation" %>
 <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+<% if admin_logged_in? %>
+<div class='row'>
+  <span class="col-xs-4">
+    <%= f.label :admin, 'Make administrator' %>
+  </span>
+  <span class="col-xs-1">
+    <%= f.check_box :admin %>
+  </span>
+</div>
+<% end %>
