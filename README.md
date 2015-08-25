@@ -12,7 +12,7 @@ To generate a Rails application using this template, pass the `-m` option to `ra
 ```
 rails new myapp \
     -d postgresql \
-    -m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+    -m https://raw.githubusercontent.com/RaphaelDeLaGhetto/rails-tutorial-template/master/template.rb
 ```
 
 # Development
