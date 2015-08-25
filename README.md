@@ -4,13 +4,26 @@ Just the best parts from Michael Hartl's wonderful [book](https://www.railstutor
 
 Learn how to [deploy it into production](http://www.libertyseeds.ca/2015/03/31/Deploying-the-Rails-Tutorial-Sample-App/).
 
-# Download
+
+# Usage
+
+To generate a Rails application using this template, pass the `-m` option to `rails new`:
+
+```
+rails new myapp \
+    -d postgresql \
+    -m https://raw.githubusercontent.com/mattbrictson/rails-template/master/template.rb
+```
+
+# Development
+
+## Download
 
 ```
 git clone https://github.com/RaphaelDeLaGhetto/rails-tutorial-template.git
 ```
 
-# Install dependencies
+## Install dependencies
 
 ```
 cd rails-tutorial-template
@@ -18,19 +31,19 @@ bundle install
 npm install
 ```
 
-# Set up database
+## Set up database
 
 ```
 rake db:setup
 ```
 
-## Test data
+### Test data
 
 ```
 rake db:seed
 ```
 
-# Configure
+## Configure
 
 `config/application.yml` is where [figaro](https://github.com/laserlemon/figaro) stores all your secret configuration details, so you need to create it manually:
 
